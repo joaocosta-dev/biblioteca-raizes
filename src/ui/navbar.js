@@ -1,82 +1,89 @@
-import { NavLink } from "react-router-dom";
 import { useAuthentication } from "../hooks/useAuthentication";
 import { useAuthValue } from "../contexts/AuthContext";
-import styles from "./Navbar.module.css";
-import logo from "../assets/logo-white.png"
+import { useRouter } from "next/navigation"
 
+import Image from 'next/image';
+import logo from '../app/public/logo-white.png';
+
+import styles from "../styles/navbar.css"
 
 const Navbar = () => {
   const { logout } = useAuthentication();
   const { user, isAdmin, loading } = useAuthValue(); // Agora temos loading e isAdmin
+  const router = useRouter();
 
+  function navigateTo(param) {
+    router.push(param)
+  }
+  console.log("Current pathname:", router.pathname);
   if (loading) {
     return <div>Carregando...</div>; // Exibe um estado de carregamento enquanto verifica
   }
 
   return (
-    <nav className={styles.navbar}>
-      <NavLink className={styles.brand} to="/">
-        <img width="200px" src={logo}></img>
-      </NavLink>
-      <ul className={styles.links_list}>
+    <nav className="navbar">
+      <button onClick={() => navigateTo("/")}>
+        <Image width={200} src={logo} alt="Logo" />
+      </button>
+      <ul className="links-list">
         <li>
-          <NavLink
-            to="/"
-            className={({ isActive }) => (isActive ? styles.active : "")}
-          >
+          <button
+            onClick={() => navigateTo("/")}
+            className={router.pathname === "" ? "active" : ""}>
             Home
-          </NavLink>
+            
+          </button>
         </li>
 
         {!user && (
           <>
             <li>
-              <NavLink
-                to="/login"
-                className={({ isActive }) => (isActive ? styles.active : "")}
+              <button
+                onClick={() => navigateTo("/login")}
+                className={router.pathname === "/login" ? "active" : ""}
               >
                 Entrar
-              </NavLink>
+              </button>
             </li>
             <li>
-              <NavLink
-                to="/register"
-                className={({ isActive }) => (isActive ? styles.active : "")}
+              <button
+                onClick={() => navigateTo("/register")}
+                className={router.pathname === "/register" ? "active" : ""}
               >
                 Cadastrar
-              </NavLink>
+              </button>
             </li>
           </>
         )}
 
-        {user && isAdmin && ( // Mostra itens de admin somente se o usuário for admin
+        {user && isAdmin && (
           <>
             <li>
-              <NavLink
-                to="/books/insert"
-                className={({ isActive }) => (isActive ? styles.active : "")}
+              <button
+                onClick={() => navigateTo("/books/insert")}
+                className={router.pathname === "/books/insert" ? "active" : ""}
               >
                 Inserir Livro
-              </NavLink>
+              </button>
             </li>
             <li>
-              <NavLink
-                to="/dashboard"
-                className={({ isActive }) => (isActive ? styles.active : "")}
+              <button
+                onClick={() => navigateTo("/dashboard")}
+                className={router.pathname === "/dashboard" ? "active" : ""}
               >
                 Dashboard
-              </NavLink>
+              </button>
             </li>
           </>
         )}
 
         <li>
-          <NavLink
-            to="/about"
-            className={({ isActive }) => (isActive ? styles.active : "")}
+          <button
+            onClick={() => navigateTo("/about")}
+            className={router.pathname === "/about" ? "active" : ""}
           >
             Sobre
-          </NavLink>
+          </button>
         </li>
 
         {user && (

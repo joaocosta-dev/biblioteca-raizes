@@ -3,11 +3,16 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import Home from './Home/home'
+import { AuthProvider } from '@/contexts/AuthContext';
+import Navbar from '@/ui/navbar';
 
 function App() {
   return (
     <>
-      <Home></Home>
+      <AuthProvider>
+        <Navbar></Navbar>
+        <Home></Home>
+      </AuthProvider>
     </>
   );
 }

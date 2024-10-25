@@ -1,14 +1,15 @@
-
 // hooks
-import BookDetail from "@/ui/bookdetail";
 import { useFetchDocuments } from "../../hooks/useFetchDocuments";
-import {  useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 // react
 import { useState } from "react";
 
+//style
+import styles from "../../styles/home.css"
+
 // components
-// import BookDetail from "../../components/BookDetail";
+import BookDetail from "@/ui/bookdetail";
 
 const Home = () => {
     const { documents: books = [], loading } = useFetchDocuments("books"); // Garante que books seja um array
@@ -34,8 +35,7 @@ const Home = () => {
 
     return (
 
-        <div className="">
-
+        <div className="home">
             {/* <form className="" onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -44,10 +44,10 @@ const Home = () => {
                 />
                 <button className="btn btn-dark">Pesquisar</button>
             </form> */}
-            <div className="">
+            <div className="books-container">
                 {loading && <p>Carregando...</p>}
                 {books && books.length === 0 && (
-                    <div className="">
+                    <div className="noboks">
                         <p>Não foram encontrados livros</p>
                         <button href="/books/create" className="btn">
                             Criar primeiro livro
@@ -60,12 +60,12 @@ const Home = () => {
                         return (
                             <li key={index}>
                                 <h2>{title}</h2>
-                                <div className="">
+                                <div className="books-list">
 
                                     {books
                                         .filter((book) => book.tags.includes(title)) // Filtra livros que possuem a tag correspondente
-                                        .map((book,indexbook) => (
-                                            <button key={indexbook} href={`/books/${book.id}`} className="">
+                                        .map((book, indexbook) => (
+                                            <button key={indexbook} href={`/books/${book.id}`} className="fit-content">
                                                 <BookDetail book={book} />
                                             </button>
                                         ))}

@@ -1,5 +1,5 @@
 
-// import styles from "./BookDetail.module.css"; // Atualize o nome do arquivo CSS se necessário
+import styles from "../styles/bookdetail.css"; // Atualize o nome do arquivo CSS se necessário
 
 const BookDetail = ({ book }) => {
   return (
@@ -8,12 +8,12 @@ const BookDetail = ({ book }) => {
       {book ? (
         <>
           {book.available && (
-            <div className="{styles.book_detail}">
+            <div className="book-detail">
               <img  src={book.image} alt={book.title} />
             </div>
           )}
           {!book.available && (
-            <div className="{styles.book_detail_indisp}">
+            <div className="book-detail-indisp">
               <img src={book.image} alt={book.title} />
             </div>
           )}
