@@ -64,9 +64,9 @@ const Home = () => {
 
                                     {books
                                         .filter((book) => book.tags.includes(title)) // Filtra livros que possuem a tag correspondente
-                                        .map((book) => (
-                                            <button href={`/books/${book.id}`} className="">
-                                                <BookDetail key={index} book={book} />
+                                        .map((book,indexbook) => (
+                                            <button key={indexbook} href={`/books/${book.id}`} className="">
+                                                <BookDetail book={book} />
                                             </button>
                                         ))}
 
