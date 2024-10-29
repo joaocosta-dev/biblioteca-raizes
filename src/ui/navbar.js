@@ -15,7 +15,6 @@ const Navbar = () => {
   function navigateTo(param) {
     router.push(param)
   }
-  console.log("Current pathname:", router.pathname);
   if (loading) {
     return <div>Carregando...</div>; // Exibe um estado de carregamento enquanto verifica
   }

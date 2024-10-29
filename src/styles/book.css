@@ -1,0 +1,44 @@
+.book-container {
+    text-align: center;
+    max-width: 300px;
+  }
+  
+  .book-container h2 {
+    margin-bottom: 0.5em; /* Estilo para o autor */
+  }
+  
+  .book-container h3 {
+    margin-bottom: 0.2em; /* Estilo para o título das tags */
+  }
+  
+  .book-container img {
+    max-width: 250px; /* Certifique-se de que a imagem não ultrapasse o container */
+    width: 100%;
+    height: auto;
+    margin-bottom: 1em;
+  }
+  
+  .book-container .tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Se houver muitas tags, elas quebram para a próxima linha */
+  }
+  
+  .tags p {
+    margin-right: 1em;
+    margin-bottom: 0.5em; /* Ajuste para espaço entre tags */
+  }
+  
+  .tags span {
+    font-weight: bold;
+  }
+  
+  .book-container p {
+    margin-top: 1em;
+  }
+  
+  .book-container .available {
+    margin-top: 1em;
+    font-weight: bold;
+    color: green;
+  }
