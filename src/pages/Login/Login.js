@@ -1,4 +1,4 @@
-import styles from "./Login.module.css";
+import styles from "./Login.css";
 
 import { useEffect, useState } from "react";
 import { useAuthentication } from "../../hooks/useAuthentication";
@@ -33,7 +33,7 @@ const Login = () => {
   }, [authError]);
 
   return (
-    <div className={styles.login}>
+    <div>
       <h1>Entrar</h1>
       <p>Faça o login para poder utilizar o sistema</p>
       <form onSubmit={handleSubmit}>
