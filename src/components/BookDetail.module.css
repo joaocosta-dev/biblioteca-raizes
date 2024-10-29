@@ -1,0 +1,31 @@
+.book_detail {
+  border: 1px solid #ddd;
+  border-radius: 21px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  max-height: 400px;
+}
+
+
+.book_detail_indisp {
+  border: 1px solid #ddd;
+  border-radius: 21px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  opacity: 0.4;
+  max-width: 300px;
+  max-height: 400px;
+}
+
+.book_detail img,
+.book_detail_indisp img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  display: flex;
+  margin: 0 auto;
+}
+

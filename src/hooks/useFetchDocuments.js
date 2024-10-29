@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { db } from "../lib/firebase/config"; // Atualize o caminho se necessário
+import { db } from "../firebase/config"; // Atualize o caminho se necessário
 import { collection, onSnapshot } from "firebase/firestore";
 
 export const useFetchDocuments = (collectionName) => {
