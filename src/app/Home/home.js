@@ -3,7 +3,7 @@ import { useFetchDocuments } from "../../hooks/useFetchDocuments";
 import { useRouter } from "next/navigation";
 
 // react
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 //style
 import styles from "../../styles/home.css"
@@ -11,9 +11,11 @@ import styles from "../../styles/home.css"
 // components
 import BookDetail from "@/ui/bookdetail";
 
+
+
 const Home = () => {
     const { documents: books = [], loading } = useFetchDocuments("books"); // Garante que books seja um array
-    // const navigate = useRouter();
+    const navigate = useRouter();
     // const [query, setQuery] = useState("");
 
     // const handleSubmit = (e) => {
@@ -23,6 +25,37 @@ const Home = () => {
     //     }
     // };
 
+    useEffect(() => {
+        let startY = 0;
+    
+        const handleTouchStart = (event) => {
+          startY = event.touches[0].clientY; // Captura a posição inicial do toque
+        };
+    
+        const handleTouchMove = (event) => {
+          event.preventDefault(); // Impede a rolagem padrão
+          const currentY = event.touches[0].clientY; // Posição atual do toque
+          window.scrollBy(0, startY - currentY); // Rolagem personalizada
+          startY = currentY; // Atualiza a posição inicial
+        };
+    
+        // Verifica se a largura da tela é menor ou igual a 768
+        if (window.innerWidth <= 768) {
+          document.body.addEventListener('touchstart', handleTouchStart, { passive: false });
+          document.body.addEventListener('touchmove', handleTouchMove, { passive: false });
+        }
+    
+        // Limpeza dos eventos ao desmontar o componente
+        return () => {
+          document.body.removeEventListener('touchstart', handleTouchStart);
+          document.body.removeEventListener('touchmove', handleTouchMove);
+        };
+      }, []);
+
+    
+    function navigateTo(param) {
+        navigate.push(param)
+    }
 
     let a = []
     books.map((book) => {
@@ -65,11 +98,10 @@ const Home = () => {
                                     {books
                                         .filter((book) => book.tags.includes(title)) // Filtra livros que possuem a tag correspondente
                                         .map((book, indexbook) => (
-                                            <button key={indexbook} href={`/books/${book.id}`} className="fit-content">
+                                            <button key={indexbook} onClick={()=>{navigateTo(`/book/${book.id}`)}} className="fit-content">
                                                 <BookDetail book={book} />
                                             </button>
                                         ))}
-
                                 </div>
                             </li>
                         );

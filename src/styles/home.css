@@ -8,14 +8,6 @@
     max-width: 300px;
   }
   
-  .card{
-    
-  }
-  
-  .card:hover{
-  
-  }
-  
   .search-form {
     margin-bottom: 20px;
   }
@@ -53,8 +45,8 @@
   }
   
   .books-list > * {
-    flex: 1 1 calc(25% - 20px); /* Ajuste conforme necessário */
-    max-width: fit-content;
+    flex: 1 1 calc(20% - 20px); /* Ajuste conforme necessário */
+    max-width: 200px;
   }
   
   .react-multi-carousel-track {
@@ -63,5 +55,20 @@
   
   .react-multi-carousel-item{
     max-width: fit-content !important;
+  }
+
+  @media(max-width:768px){
+    .books-list {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 20px;
+        overflow-x: scroll;
+      }
+   
+    .books-list > * {
+        flex: 1 1 calc(25% - 20px); /* Ajuste conforme necessário */
+        max-width: 300px;
+        min-width: 200px;
+      }
   }
   
