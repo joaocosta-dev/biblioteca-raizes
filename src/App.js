@@ -13,7 +13,7 @@ import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 
 // components
-import Navbar from "./components/Navbar";
+import Navbar from "./components/NavigationBar";
 import Footer from "./components/Footer";
 import CreateBook from "./pages/CreateBook/CreateBook";
 import Search from "./pages/Search/Search";
@@ -25,6 +25,10 @@ import Book from "./pages/Book/Book";
 
 // context
 import { AuthProvider } from "./contexts/AuthContext";
+
+//theme
+import { ThemeProvider } from '@emotion/react';
+import { theme } from './theme/themeNavbar';
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -46,7 +50,9 @@ function App() {
     <div className="App">
       <AuthProvider value={{ user }}>
         <BrowserRouter>
+        <ThemeProvider theme={theme}>
           <Navbar />
+        </ThemeProvider>
           <div className="container">
             <Routes>
               <Route path="/" element={<Home />} />

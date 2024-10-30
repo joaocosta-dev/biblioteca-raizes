@@ -2,6 +2,9 @@ import styles from "./Login.css";
 
 import { useEffect, useState } from "react";
 import { useAuthentication } from "../../hooks/useAuthentication";
+import emailVector from '../../assets/email-vector.svg';
+import passwordImage from '../../assets/password-vector.svg';
+import mainImage from '../../assets/login-illustrator.svg';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -33,40 +36,55 @@ const Login = () => {
   }, [authError]);
 
   return (
-    <div>
-      <h1>Entrar</h1>
-      <p>Faça o login para poder utilizar o sistema</p>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <span>E-mail:</span>
-          <input
-            type="email"
-            name="email"
-            required
-            placeholder="E-mail do usuário"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
-        </label>
-        <label>
-          <span>Senha:</span>
-          <input
-            type="password"
-            name="password"
-            required
-            placeholder="Insira a senha"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-          />
-        </label>
-        {!loading && <button className="btn">Entrar</button>}
-        {loading && (
-          <button className="btn" disabled>
-            Aguarde...
-          </button>
-        )}
-        {error && <p className="error">{error}</p>}
-      </form>
+    <div className="login login-page flex bg-white">
+      <div className='left-content'>
+        <h1>Entrar na sua conta</h1>
+        <p>Faça o login para poder utilizar o sistema</p>
+        <form onSubmit={handleSubmit}>
+          <label>
+            <span>E-mail:</span>
+            <div className='input-and-image'>
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="E-mail do usuário"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+              />
+              <div className="image-input">
+                <img src={emailVector}/>
+              </div>
+            </div>
+          </label>
+          <label>
+            <span>Senha:</span>
+            <div className='input-and-image'>
+              <input
+                type="password"
+                name="password"
+                required
+                placeholder="Insira a senha"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+              />
+              <div className="image-input">
+                <img src={passwordImage}/>
+              </div>
+            </div>
+          </label>
+          {!loading && <button className="btn btn-login">Entrar</button>}
+          {loading && (
+            <button className="btn" disabled>
+              Aguarde...
+            </button>
+          )}
+          {error && <p className="error">{error}</p>}
+        </form>
+      </div>
+      <div className='right-content'>
+          <img width={"100%"} src={mainImage}/>
+      </div>
     </div>
   );
 };
