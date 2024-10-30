@@ -1,4 +1,4 @@
-import styles from "./Book.module.css";
+import styles from "./Book.css";
 
 // hooks
 import { useFetchDocument } from "../../hooks/useFetchDocument";
@@ -48,7 +48,7 @@ const Book = () => {
   }
 
   return (
-    <div className={styles.book_container}>
+    <div className="book_container">
       {book && (
         <>
           <h1>{book.title}</h1> {/* Título do livro */}
@@ -57,7 +57,7 @@ const Book = () => {
           <p>{book.description}</p> {/* Descrição do livro */}
 
           <h3>Tags deste livro:</h3>
-          <div className={styles.tags}>
+          <div className="tags">
             {book.tags.split(',').map((tag) => (
               <p key={tag}>
                 {tag}

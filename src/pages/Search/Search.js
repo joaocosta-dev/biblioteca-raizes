@@ -26,7 +26,15 @@ const Search = () => {
             </Link>
           </>
         )}
-        {books && books.map((book) => <BookDetail key={book.id} post={book} />)}
+        {books && (
+          books.filter((book) => book.title.includes(search)).length > 0 ? (
+            books
+              .filter((book) => book.title.toLowerCase().includes(search))
+              .map((book) => <BookDetail key={book.id} book={book} />)
+          ) : (
+            <p>Nenhum item encontrado</p>
+          )
+        )}
       </div>
     </div>
   );

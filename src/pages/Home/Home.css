@@ -6,14 +6,6 @@
   max-width: 300px;
 }
 
-.card{
-  
-}
-
-.card:hover{
-
-}
-
 .search_form {
   margin-bottom: 20px;
 }
@@ -46,12 +38,15 @@
 
 .books_list {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 20px;
+  overflow-x: scroll;
 }
 
 .books_list > * {
-  flex: 1 1 calc(25% - 20px); /* Ajuste conforme necessário */
+  flex: 1 1 calc(20% - 30px); /* Ajuste conforme necessário */
+  max-width: 200px;
+  min-width: 200px;
 }
 
 .react-multi-carousel-track {
@@ -61,3 +56,19 @@
 .react-multi-carousel-item{
   max-width: fit-content !important;
 }
+
+/* @media(max-width:768px){
+  .books_list {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 20px;
+    }
+ 
+  .books_list > * {
+      flex: 1 1 calc(25% - 20px); 
+      max-width: 300px;
+      min-width: 200px;
+    }
+} 
+
+*/

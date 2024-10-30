@@ -7,6 +7,12 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Quicksand", sans-serif;
+  
+  ::-webkit-scrollbar {
+    display: none; /* Para navegadores WebKit */
+  }
+  
+  scrollbar-width: none; /* Para Firefox */
 }
 
 input::placeholder,
@@ -118,3 +124,4 @@ button[disabled] {
   padding: 5px;
   border-radius: 5px;
 }
+
