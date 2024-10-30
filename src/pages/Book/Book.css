@@ -1,46 +1,44 @@
-.book-container {
-  .right-content {
-    display: flex;
-    padding: 10px;
-    background-color: #032924;
-    border-radius: 10px;
-    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.50);
-    transition: .3s ease-in-out;
-  }
+.book_container {
+  text-align: center;
+  max-width: 300px;
+}
 
-  .right-content:hover {
-    transform: scale(1.01);
-  }
+.book_container h2 {
+  margin-bottom: 0.5em; /* Estilo para o autor */
+}
 
-  .right-content img {
-    border-radius: 10px;
-    max-width: 340px;
-  }
+.book_container h3 {
+  margin-bottom: 0.2em; /* Estilo para o título das tags */
+}
 
-  .left-content {
-    color: white;
-  }
+.book_container img {
+  max-width: 250px; /* Certifique-se de que a imagem não ultrapasse o container */
+  width: 100%;
+  height: auto;
+  margin-bottom: 1em;
+}
 
-  .left-content .author {
-    border-left: 5px solid black;
-    border-radius: 5px;
-    width: 100%;
-    max-width: 550px;
-  }
+.book_container .tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Se houver muitas tags, elas quebram para a próxima linha */
+}
 
-  .box-tag-book {
-    width: fit-content;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    max-width: 550px;
-  }
-  
-  .tag-book {
-    background: black;
-    padding: 8px;
-    border-radius: 10px;
-    color: white;
-    font-weight: 700;
-  }
+.tags p {
+  margin-right: 1em;
+  margin-bottom: 0.5em; /* Ajuste para espaço entre tags */
+}
+
+.tags span {
+  font-weight: bold;
+}
+
+.book_container p {
+  margin-top: 1em;
+}
+
+.book_container .available {
+  margin-top: 1em;
+  font-weight: bold;
+  color: green;
 }
