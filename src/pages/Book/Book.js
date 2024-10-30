@@ -6,6 +6,8 @@ import { useUpdateDocument } from "../../hooks/useUpdateDocument";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import Button from '@mui/material/Button';
+
 const Book = () => {
   const [additionalDays, setAdditionalDays] = useState(0)
   const { id } = useParams();
@@ -48,48 +50,66 @@ const Book = () => {
   }
 
   return (
-    <div className="book_container">
-      {book && (
-        <>
-          <h1>{book.title}</h1> {/* Título do livro */}
-          <h2>{book.author}</h2> {/* Autor do livro */}
-          <img src={book.image} alt={book.title} /> {/* Imagem/Capa do livro */}
-          <p>{book.description}</p> {/* Descrição do livro */}
+    <div className="book-container container flex justify-around py-14">
+      <div className="left-content">
+        {book && (
+          <>
+            <div className="author mb-6 p-2">
+              <h1 className="font-bold text-3xl ms-1">{book.title}</h1> {/* Título do livro */}
+              <h2 className="font-medium text-2xl ms-1">{book.author}</h2> {/* Autor do livro */}
+            </div>
+            <p className="max-w-[550px] text-xl font-medium mb-6">{book.description}</p> {/* Descrição do livro */}
 
-          <h3>Tags deste livro:</h3>
-          <div className="tags">
-            {book.tags.split(',').map((tag) => (
-              <p key={tag}>
-                {tag}
-              </p>
-            ))}
-          </div>
+            <h3 className="text-lg mb-1">Tags deste livro:</h3>
+            <div className="box-tag-book mb-8">
+              {book.tags.split(',').map((tag) => (
+                <p className="tag-book" key={tag}>
+                  {tag}
+                </p>
+              ))}
+            </div>
 
-          <p>
-            <strong>Disponível:</strong> {book.available ? "Sim" : "Não"} {/* Disponibilidade */}
-          </p>
-          <p>
-            <strong>Criado por:</strong> {book.createdBy} {/* Usuário que criou */}
-          </p>
-          {book.available === true && (
-            <>
-              <p>O prazo de devolução começa a partir da retirada no próximo domingo<br></br> O livro precisa ser devolvido em: {returnDeadline()}</p>
-              <button onClick={handleLocate}>
-                Locar
-              </button>
-            </>
-          )}
-          {book.available === false && (
-            <>
-              <p>Voce tem até dia {returnDeadline()} para devolução do livro<br />
-                Gostaria de solicitar mais {Math.round(book.pages / 20)} dia(s)?</p>
-              <button onClick={() => handleAddDays(Math.round(book.pages / 20))}>
-                Solicitar
-              </button>
-            </>
-          )}
-        </>
-      )}
+            <p className="mb-3">
+              <strong>Disponível:</strong> {book.available ? "Sim" : "Não"} {/* Disponibilidade */}
+            </p>
+            {/* <p>
+              <strong>Criado por:</strong> {book.createdBy}  Usuário que criou 
+            </p> */}
+            {book.available === true && (
+              <>
+                <p className="text-lg font-medium mb-3">O prazo de devolução começa a partir da retirada no próximo domingo<br></br> O livro precisa ser devolvido em: {returnDeadline()}</p>
+                <Button
+                  sx={{backgroundColor: "black"}} 
+                  variant="contained"
+                  className="w-full"
+                  onClick={handleLocate}
+                >
+                  Locar
+                </Button>
+              </>
+            )}
+            {book.available === false && (
+              <>
+                {/* <p>Voce tem até dia {returnDeadline()} para devolução do livro<br />
+                  Gostaria de solicitar mais {Math.round(book.pages / 20)} dia(s)?</p> */}
+                <Button 
+                  sx={{backgroundColor: "black"}} 
+                  variant="contained"
+                  className="w-full"
+                  onClick={() => handleAddDays(Math.round(book.pages / 20))}
+                >
+                    Solicitar
+                </Button>
+              </>
+            )}
+          </>
+        )}
+      </div>
+      <div className="right-content">
+        {book && (
+          <img src={book.image} alt={book.title} />
+        )}
+      </div>
     </div>
   );
 };
