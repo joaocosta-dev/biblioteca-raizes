@@ -1,11 +1,14 @@
 import styles from "./Login.css";
 
 import { useEffect, useState } from "react";
+
 import { useAuthentication } from "../../hooks/useAuthentication";
 import emailVector from '../../assets/email-vector.svg';
 import passwordImage from '../../assets/password-vector.svg';
 import mainImage from '../../assets/login-illustrator.svg';
 import logo from "../../assets/logo-white.png";
+
+import Button from '@mui/material/Button';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -77,13 +80,14 @@ const Login = () => {
               </div>
             </div>
           </label>
-          {!loading && <button className="btn btn-login">Entrar</button>}
+          {!loading && <button className="btn btn-login mb-2">Entrar</button>}
           {loading && (
             <button className="btn" disabled>
               Aguarde...
             </button>
           )}
           {error && <p className="error">{error}</p>}
+          <Button href="/register">Não tem uma conta ainda?</Button>
         </form>
       </div>
       <div className='right-content'>

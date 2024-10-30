@@ -6,6 +6,8 @@ import { useUpdateDocument } from "../../hooks/useUpdateDocument";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import { useAuthValue } from "../../contexts/AuthContext";
+
 import Button from '@mui/material/Button';
 
 const Book = () => {
@@ -13,6 +15,8 @@ const Book = () => {
   const { id } = useParams();
   const { document: book } = useFetchDocument("books", id); // Alterado para buscar 'books'
   const navigate = useNavigate();
+
+  const { user, isAdmin, loading } = useAuthValue();
 
   const daysUntilSunday = () => {
     const today = new Date(); // Pega a data de hoje
@@ -40,9 +44,14 @@ const Book = () => {
   };
 
   const handleLocate = (e) => {
-    e.preventDefault();
-    updateDocument(id, { available: false })
-    navigate("/");
+    //Verifica se o usuários está logado para fazer a locação do livro
+    if(user !== null) {
+      e.preventDefault();
+      updateDocument(id, { available: false })
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
   }
 
   const handleAddDays = (p) => {
