@@ -10,18 +10,18 @@ const Dashboard = () => {
   const { user } = useAuthValue();
   const uid = user.uid;
 
-  const { documents: posts } = useFetchDocuments("posts", null, uid);
+  const { documents: users } = useFetchDocuments("users", null, uid);
 
-  const { deleteDocument } = useDeleteDocument("posts");
+  // const { deleteDocument } = useDeleteDocument("posts");
 
   console.log(uid);
-  console.log(posts);
+  console.log(users);
 
   return (
     <div className={styles.dashboard}>
       <h2>Dashboard</h2>
       <p>Gerencie os seus posts</p>
-      {posts && posts.length === 0 ? (
+      {users && users.length === 0 ? (
         <div className={styles.noposts}>
           <p>Não foram encontrados posts</p>
           <Link to="/posts/create" className="btn">
@@ -35,10 +35,10 @@ const Dashboard = () => {
         </div>
       )}
 
-      {posts &&
-        posts.map((post) => (
+      {users &&
+        users.map((post) => (
           <div className={styles.post_row} key={post.id}>
-            <p>{post.title}</p>
+            <p>{users.title}</p>
             <div className={styles.actions}>
               <Link to={`/posts/${post.id}`} className="btn btn-outline">
                 Ver
@@ -47,7 +47,7 @@ const Dashboard = () => {
                 Editar
               </Link>
               <button
-                onClick={() => deleteDocument(post.id)}
+                // onClick={() => deleteDocument(post.id)}
                 className="btn btn-outline btn-danger"
               >
                 Excluir

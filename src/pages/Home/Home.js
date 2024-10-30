@@ -45,7 +45,7 @@ const Home = () => {
     <div className="home">
 
       <Box component="form"
-        sx={{ '& > :not(style)': { m: 1, width: '50ch' } }}
+        sx={{ '& > :not(style)': { m: 1, width: '100%', maxWidth:'475px' } }}
         noValidate
         autoComplete="off">
         <TextField id="outlined-basic"

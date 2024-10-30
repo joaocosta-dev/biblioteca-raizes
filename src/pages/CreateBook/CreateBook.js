@@ -67,11 +67,11 @@ const CreateBook = () => {
         <Box sx={{ m: 4, width: "65ch", display: "flex", justifyContent: "center", flexDirection: 'column' }}>
           <Typography variant="h4" sx={{ color: '#FFFFFF' }}>Enriqueça sua biblioteca adicionando os seus livros disponiveis para locação</Typography>
           <ul>
-            <p className="text-xl mt-14 mb-4 text-white font-bold">Observações para inserção:</p>
-            <li className="list-disc text-lg text-white ml-5 mb-2">Todos os campos devem ser preenchidos para conseguir criar um livro.</li>
-            <li className="list-disc text-lg text-white ml-5 mb-2">A URL da capa deve ser uma imagem cheia do livro.</li>
-            <li className="list-disc text-lg text-white ml-5 mb-2">As tags devem ser inseridas com o formato <code>#tag</code> e separadas por vírgula caso tenha mais de uma.</li>
-            <li className="list-disc text-lg text-white ml-5 mb-2">As categorias dos livros serão criadas de acordo com as tags. Exemplo de inserção: <code>#Autocuidado, #Estudos</code>.</li>
+            <p className="text-xl mt-14 mb-4 text-white">Observações para inserção:</p>
+            <li className="list-disc text-lg text-white ml-5 mb-2 font-bold">Todos os campos devem ser preenchidos para conseguir criar um livro.</li>
+            <li className="list-disc text-lg text-white ml-5 mb-2 font-bold">A URL da capa deve ser uma imagem cheia do livro.</li>
+            <li className="list-disc text-lg text-white ml-5 mb-2 font-bold">As tags devem ser inseridas com o formato <code>#tag</code> e separadas por vírgula caso tenha mais de uma.</li>
+            <li className="list-disc text-lg text-white ml-5 mb-2 font-bold">As categorias dos livros serão criadas de acordo com as tags. Exemplo de inserção: <code>#Autocuidado, #Estudos</code>.</li>
           </ul>
         </Box>
         <Box component="form" onSubmit={handleSubmit} sx={{ m: 4, width: "60ch", background: "linear-gradient(225deg, #000000, #333333)", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.4)", borderRadius: "15px", padding: "20px" }}>
@@ -272,7 +272,7 @@ const CreateBook = () => {
               variant="contained"
               color="primary"
               type="submit"
-              sx={{ mt: 2,fontSize:'18px',padding:'12px', color: '#FFF', background: '#0B8C7C', ":hover": { background: '#086A5D' } }} // Cor do botão
+              sx={{ mt: 2,fontSize:'16px',padding:'12px',borderRadius:'10px', color: '#FFF', background: '#0B8C7C', ":hover": { background: '#086A5D' } }} // Cor do botão
               disabled={response.loading}
             >
               {response.loading ? 'Aguarde...' : 'Criar livro'}
