@@ -5,6 +5,7 @@ import { useAuthentication } from "../../hooks/useAuthentication";
 import emailVector from '../../assets/email-vector.svg';
 import passwordImage from '../../assets/password-vector.svg';
 import mainImage from '../../assets/login-illustrator.svg';
+import logo from "../../assets/logo-white.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -38,6 +39,9 @@ const Login = () => {
   return (
     <div className="login login-page flex bg-white">
       <div className='left-content'>
+        <div className="logo-container">
+          <img width="120px" src={logo} alt="logo da empresa"></img>
+        </div>
         <h1>Entrar na sua conta</h1>
         <p>Faça o login para poder utilizar o sistema</p>
         <form onSubmit={handleSubmit}>
