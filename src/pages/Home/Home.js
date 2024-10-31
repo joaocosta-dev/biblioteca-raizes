@@ -1,15 +1,40 @@
 import styles from "./Home.css";
 import { useFetchDocuments } from "../../hooks/useFetchDocuments";
-import { useNavigate, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import BookDetail from "../../components/BookDetail";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
+import ModalThanks from '../../components/ModalThanks';
+
 const Home = () => {
   const { documents: books = [], loading } = useFetchDocuments("books");
   const [query, setQuery] = useState("");
   const [filteredBooks, setFilteredBooks] = useState([]);
+
+  const location = useLocation();
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    const flagNavigation = localStorage.getItem('navHome');
+    if(location.pathname === '/' && flagNavigation === 'true') {
+      setShowModal(true);
+
+      const handleClickPage = () => {
+        setShowModal(false);
+        localStorage.removeItem('navHome');
+        document.addEventListener('click', handleClickPage);
+      }
+
+      document.addEventListener('click', handleClickPage);
+
+      //remove o listener se o componente desmontar
+      return () => {
+        document.removeEventListener('click', handleClickPage);
+      }
+    }
+  }, [location])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,10 +65,11 @@ const Home = () => {
   });
   a = [...new Set(a.map(tag => tag.trim()))]; // Remove duplicatas e espaços
 
+  console.log("showModalHome: " + showModal)
+
   return (
-
     <div className="home">
-
+      {showModal && <ModalThanks showModalThanks={showModal}/>}
       <Box component="form"
         sx={{ '& > :not(style)': { m: 1, width: '50ch' } }}
         noValidate
