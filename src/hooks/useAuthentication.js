@@ -43,7 +43,8 @@ export const useAuthentication = () => {
       await setDoc(doc(db, "users", user.uid), {
         displayName: data.displayName,
         email: data.email,
-        isAdmin: data.isAdmin || false,  // Define a flag isAdmin como false por padrão ou conforme definido
+        isAdmin: data.isAdmin || false,// Define a flag isAdmin como false por padrão ou conforme definido
+        readedBooks: data.readedBooks  
       });
 
       return user;

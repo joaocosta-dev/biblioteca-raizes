@@ -13,6 +13,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [isAdmin, setIsAdmin] = useState(false)
+  const [readedBooks, setReadedBooks] = useState([])
 
   const { createUser, error: authError, loading } = useAuthentication();
 
@@ -26,6 +27,7 @@ const Register = () => {
       email,
       password,
       isAdmin,
+      readedBooks
     };
 
     if (password !== confirmPassword) {

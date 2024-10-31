@@ -20,6 +20,7 @@ import Search from "./pages/Search/Search";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Dash from "./pages/Dash/Dash";
 import EditBook from "./pages/EditBook/EditBook";
 import Book from "./pages/Book/Book";
 
@@ -50,9 +51,9 @@ function App() {
     <div className="App">
       <AuthProvider value={{ user }}>
         <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <Navbar />
-        </ThemeProvider>
+          <ThemeProvider theme={theme}>
+            <Navbar />
+          </ThemeProvider>
           <div className="container">
             <Routes>
               <Route path="/" element={<Home />} />
@@ -79,6 +80,7 @@ function App() {
                 path="/dashboard"
                 element={user ? <Dashboard /> : <Navigate to="/login" />}
               />
+
             </Routes>
           </div>
           <Footer />

@@ -14,6 +14,7 @@ const CreateBook = () => {
   const [tags, setTags] = useState("");
   const [available, setAvailable] = useState(true);
   const [pages, setPages] = useState(0);
+  const [status, setStatus] = useState("")
 
   const [formError, setFormError] = useState("");
 
@@ -53,6 +54,7 @@ const CreateBook = () => {
       pages,
       uid: user.uid,
       createdBy: user.displayName,
+      status
     });
 
     // Redirect to home page

@@ -4,58 +4,66 @@ import { Link } from "react-router-dom";
 
 import { useAuthValue } from "../../contexts/AuthContext";
 import { useFetchDocuments } from "../../hooks/useFetchDocuments";
+import { useFetchDocument } from "../../hooks/useFetchDocument";
 import { useDeleteDocument } from "../../hooks/useDeleteDocument";
 
 const Dashboard = () => {
   const { user } = useAuthValue();
-  const uid = user.uid;
 
-  const { documents: users } = useFetchDocuments("users", null, uid);
+  // Busca os usuários
+  const { document: userspecific } = useFetchDocument("users", user?.uid);
+  const readedBooks = userspecific.readedBooks;
+  
+  // Busca todos os livros
+  const { documents: books } = useFetchDocuments("books");
+  const { documents: rentals } = useFetchDocuments("rental");
 
-  // const { deleteDocument } = useDeleteDocument("posts");
 
-  console.log(uid);
-  console.log(users);
+  // Filtra os livros lidos
+  const readedBooksfilter = books?.filter((book) => readedBooks.includes(book.id));
 
+  const { deleteDocument } = useDeleteDocument("books");
+  
   return (
-    <div className={styles.dashboard}>
-      <h2>Dashboard</h2>
-      <p>Gerencie os seus posts</p>
-      {users && users.length === 0 ? (
-        <div className={styles.noposts}>
-          <p>Não foram encontrados posts</p>
-          <Link to="/posts/create" className="btn">
-            Criar primeiro post
-          </Link>
-        </div>
-      ) : (
-        <div className={styles.post_header}>
-          <span>Título</span>
-          <span>Ações</span>
-        </div>
-      )}
+    user && userspecific.isAdmin !== true ? (
 
-      {users &&
-        users.map((post) => (
-          <div className={styles.post_row} key={post.id}>
-            <p>{users.title}</p>
-            <div className={styles.actions}>
-              <Link to={`/posts/${post.id}`} className="btn btn-outline">
-                Ver
-              </Link>
-              <Link to={`/posts/edit/${post.id}`} className="btn btn-outline">
-                Editar
-              </Link>
-              <button
-                // onClick={() => deleteDocument(post.id)}
-                className="btn btn-outline btn-danger"
-              >
-                Excluir
-              </button>
-            </div>
-          </div>
-        ))}
-    </div>
+      <>
+        < div className={styles.dashboard} >
+          <h2>Área do leitor</h2>
+          <p>Acompanhe suas solicitações e leituras realizadas</p>
+          <h3 className="text-3xl underline">Aguardando aprovação</h3>
+          {
+            readedBooksfilter && readedBooksfilter.length === 0 ? (
+              <div className={styles.noposts}>
+                <p>Não foram encontrados livros lidos</p>
+              </div>
+            ) : (
+              <div className={styles.post_header}>
+                <span>Título</span>
+              </div>
+            )
+          }
+
+          {
+            readedBooksfilter &&
+            readedBooksfilter.map((book) => (
+              <div className={styles.post_row} key={book.id}>
+                <p>{book.title}</p>
+                <div className={styles.actions}>
+                  <Link to={`/books/${book.id}`} className="btn btn-outline">
+                    Ver
+                  </Link>
+                </div>
+              </div>
+            ))
+          }
+        </div >
+      </>
+
+    ) : (
+      <p>rereorkoekroekro</p>
+    )
+
   );
 };
 

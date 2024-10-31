@@ -3,6 +3,7 @@ import styles from "./Book.css";
 // hooks
 import { useFetchDocument } from "../../hooks/useFetchDocument";
 import { useUpdateDocument } from "../../hooks/useUpdateDocument";
+import { useInsertDocument } from "../../hooks/useInsertDocument";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -14,6 +15,7 @@ const Book = () => {
   const [additionalDays, setAdditionalDays] = useState(0)
   const { id } = useParams();
   const { document: book } = useFetchDocument("books", id); // Alterado para buscar 'books'
+  const { bookt, setBookt } = useState();
   const navigate = useNavigate();
 
   const { user, isAdmin, loading } = useAuthValue();
@@ -29,6 +31,9 @@ const Book = () => {
   };
 
   const { updateDocument, response } = useUpdateDocument("books");
+  const { insertDocument } = useInsertDocument("rental")
+
+
 
 
   const returnDeadline = () => {
@@ -45,9 +50,20 @@ const Book = () => {
 
   const handleLocate = (e) => {
     //Verifica se o usuários está logado para fazer a locação do livro
-    if(user !== null) {
+    if (user !== null) {
       e.preventDefault();
-      updateDocument(id, { available: false })
+
+      const rentalData = {
+        bookId: id,
+        userId: user.uid,
+        userName: user.displayName,
+        bookTitle: book.title,
+        returnDate: returnDeadline()
+      };
+
+
+      insertDocument(rentalData);
+      updateDocument(id, { available: false, status:"waitingAprov"})
       navigate("/");
     } else {
       navigate("/login");
@@ -61,7 +77,7 @@ const Book = () => {
   return (
     <div className="book-container container flex justify-around py-14">
       <div className="left-content">
-        {book && (
+        {book &&  (
           <>
             <div className="author mb-6 p-2">
               <h1 className="font-bold text-3xl ms-1">{book.title}</h1> {/* Título do livro */}
@@ -88,7 +104,7 @@ const Book = () => {
               <>
                 <p className="text-lg font-medium mb-3">O prazo de devolução começa a partir da retirada no próximo domingo<br></br> O livro precisa ser devolvido em: {returnDeadline()}</p>
                 <Button
-                  sx={{backgroundColor: "black"}} 
+                  sx={{ backgroundColor: "black" }}
                   variant="contained"
                   className="w-full"
                   onClick={handleLocate}
@@ -101,13 +117,13 @@ const Book = () => {
               <>
                 {/* <p>Voce tem até dia {returnDeadline()} para devolução do livro<br />
                   Gostaria de solicitar mais {Math.round(book.pages / 20)} dia(s)?</p> */}
-                <Button 
-                  sx={{backgroundColor: "black"}} 
+                <Button
+                  sx={{ backgroundColor: "black" }}
                   variant="contained"
                   className="w-full"
                   onClick={() => handleAddDays(Math.round(book.pages / 20))}
                 >
-                    Solicitar
+                  Solicitar
                 </Button>
               </>
             )}
