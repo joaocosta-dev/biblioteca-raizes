@@ -12,7 +12,8 @@ const Dashboard = () => {
 
   // Busca os usuários
   const { document: userspecific } = useFetchDocument("users", user?.uid);
-  const readedBooks = userspecific.readedBooks;
+  // const readedBooks = userspecific.readedBooks;
+  const readedBooks = userspecific?.readedBooks || []
   
   // Busca todos os livros
   const { documents: books } = useFetchDocuments("books");
@@ -25,7 +26,7 @@ const Dashboard = () => {
   const { deleteDocument } = useDeleteDocument("books");
   
   return (
-    user && userspecific.isAdmin !== true ? (
+    user && userspecific?.isAdmin !== true ? (
 
       <>
         < div className={styles.dashboard} >
