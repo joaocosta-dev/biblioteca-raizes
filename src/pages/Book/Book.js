@@ -50,7 +50,8 @@ const Book = () => {
 
   const handleLocate = (e) => {
     //Verifica se o usuários está logado para fazer a locação do livro
-    if (user !== null) {
+    if(user !== null) {
+      localStorage.setItem('navHome', 'true');
       e.preventDefault();
 
       const rentalData = {
