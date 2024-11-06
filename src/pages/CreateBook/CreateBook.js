@@ -1,36 +1,36 @@
-import styles from "./CreateBook.module.css"; // Renomeie o arquivo CSS se necessário
+import styles from './CreateBook.module.css'; // Renomeie o arquivo CSS se necessário
 
-import { useState } from "react";
-import { useInsertDocument } from "../../hooks/useInsertDocument";
-import { useNavigate } from "react-router-dom";
-import { useAuthValue } from "../../contexts/AuthContext";
+import { useState } from 'react';
+import { useInsertDocument } from '../../hooks/useInsertDocument';
+import { useNavigate } from 'react-router-dom';
+import { useAuthValue } from '../../contexts/AuthContext';
 import { TextField, Button, Typography, Box } from '@mui/material';
 
 const CreateBook = () => {
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState(""); // Novo campo para autor
-  const [image, setImage] = useState("");
-  const [description, setDescription] = useState(""); // Novo campo para descrição
-  const [tags, setTags] = useState("");
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState(''); // Novo campo para autor
+  const [image, setImage] = useState('');
+  const [description, setDescription] = useState(''); // Novo campo para descrição
+  const [tags, setTags] = useState('');
   const [available, setAvailable] = useState(true);
   const [pages, setPages] = useState(0);
-  const [status, setStatus] = useState("")
+  const [status, setStatus] = useState('');
 
-  const [formError, setFormError] = useState("");
+  const [formError, setFormError] = useState('');
 
   const { user } = useAuthValue();
   const navigate = useNavigate();
-  const { insertDocument, response } = useInsertDocument("books"); // Atualize o nome da coleção
+  const { insertDocument, response } = useInsertDocument('books'); // Atualize o nome da coleção
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormError("");
+    setFormError('');
 
     // Validate image URL
     try {
       new URL(image);
     } catch (error) {
-      setFormError("A imagem precisa ser uma URL.");
+      setFormError('A imagem precisa ser uma URL.');
     }
 
     // Create tags array
@@ -38,7 +38,7 @@ const CreateBook = () => {
 
     // Check values
     if (!title || !author || !image || !description || !tags || !pages) {
-      setFormError("Por favor, preencha todos os campos!");
+      setFormError('Por favor, preencha todos os campos!');
       return;
     }
 
@@ -54,31 +54,79 @@ const CreateBook = () => {
       pages,
       uid: user.uid,
       createdBy: user.displayName,
-      status
+      status,
     });
 
     // Redirect to home page
-    navigate("/");
+    navigate('/');
   };
 
   return (
-
     <div className="flex justify-center">
-
-      <Box sx={{ m: 3, width: "100%", background: "linear-gradient(45deg, #0B8C7C, #086A5D);", borderRadius: "15px", padding: "20px", display: "flex", justifyContent: "space-between", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.4)" }}>
-        <Box sx={{ m: 4, width: "65ch", display: "flex", justifyContent: "center", flexDirection: 'column' }}>
-          <Typography variant="h4" sx={{ color: '#FFFFFF' }}>Enriqueça sua biblioteca adicionando os seus livros disponiveis para locação</Typography>
+      <Box
+        sx={{
+          m: 3,
+          width: '100%',
+          background: 'linear-gradient(45deg, #0B8C7C, #086A5D);',
+          borderRadius: '15px',
+          padding: '20px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          boxShadow: '0 4px 10px rgba(0, 0, 0, 0.4)',
+        }}
+      >
+        <Box
+          sx={{
+            m: 4,
+            width: '65ch',
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+          }}
+        >
+          <Typography variant="h4" sx={{ color: '#FFFFFF' }}>
+            Enriqueça sua biblioteca adicionando os seus livros disponiveis para
+            locação
+          </Typography>
           <ul>
-            <p className="text-xl mt-14 mb-4 text-white">Observações para inserção:</p>
-            <li className="list-disc text-lg text-white ml-5 mb-2 font-bold">Todos os campos devem ser preenchidos para conseguir criar um livro.</li>
-            <li className="list-disc text-lg text-white ml-5 mb-2 font-bold">A URL da capa deve ser uma imagem cheia do livro.</li>
-            <li className="list-disc text-lg text-white ml-5 mb-2 font-bold">As tags devem ser inseridas com o formato <code>#tag</code> e separadas por vírgula caso tenha mais de uma.</li>
-            <li className="list-disc text-lg text-white ml-5 mb-2 font-bold">As categorias dos livros serão criadas de acordo com as tags. Exemplo de inserção: <code>#Autocuidado, #Estudos</code>.</li>
+            <p className="text-xl mt-14 mb-4 text-white">
+              Observações para inserção:
+            </p>
+            <li className="list-disc text-lg text-white ml-5 mb-2 font-bold">
+              Todos os campos devem ser preenchidos para conseguir criar um
+              livro.
+            </li>
+            <li className="list-disc text-lg text-white ml-5 mb-2 font-bold">
+              A URL da capa deve ser uma imagem cheia do livro.
+            </li>
+            <li className="list-disc text-lg text-white ml-5 mb-2 font-bold">
+              As tags devem ser inseridas com o formato <code>#tag</code> e
+              separadas por vírgula caso tenha mais de uma.
+            </li>
+            <li className="list-disc text-lg text-white ml-5 mb-2 font-bold">
+              As categorias dos livros serão criadas de acordo com as tags.
+              Exemplo de inserção: <code>#Autocuidado, #Estudos</code>.
+            </li>
           </ul>
         </Box>
-        <Box component="form" onSubmit={handleSubmit} sx={{ m: 4, width: "60ch", background: "linear-gradient(225deg, #000000, #333333)", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.4)", borderRadius: "15px", padding: "20px" }}>
-          <Typography variant="h4" sx={{ color: '#FFFFFF' }}>Criar livro</Typography>
-          <Typography variant="body1" sx={{ color: '#FFFFFF' }}>Adicione um novo livro à sua biblioteca!</Typography>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{
+            m: 4,
+            width: '60ch',
+            background: 'linear-gradient(225deg, #000000, #333333)',
+            boxShadow: '0 4px 10px rgba(0, 0, 0, 0.4)',
+            borderRadius: '15px',
+            padding: '20px',
+          }}
+        >
+          <Typography variant="h4" sx={{ color: '#FFFFFF' }}>
+            Criar livro
+          </Typography>
+          <Typography variant="body1" sx={{ color: '#FFFFFF' }}>
+            Adicione um novo livro à sua biblioteca!
+          </Typography>
 
           <TextField
             label="Título"
@@ -274,13 +322,20 @@ const CreateBook = () => {
               variant="contained"
               color="primary"
               type="submit"
-              sx={{ mt: 2,fontSize:'16px',padding:'12px',borderRadius:'10px', color: '#FFF', background: '#0B8C7C', ":hover": { background: '#086A5D' } }} // Cor do botão
+              sx={{
+                mt: 2,
+                fontSize: '16px',
+                padding: '12px',
+                borderRadius: '10px',
+                color: '#FFF',
+                background: '#0B8C7C',
+                ':hover': { background: '#086A5D' },
+              }} // Cor do botão
               disabled={response.loading}
             >
               {response.loading ? 'Aguarde...' : 'Criar livro'}
             </Button>
           </div>
-
 
           {(response.error || formError) && (
             <Typography color="error" sx={{ mt: 2 }}>

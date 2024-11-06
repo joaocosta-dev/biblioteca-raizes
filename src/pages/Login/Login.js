@@ -1,26 +1,26 @@
-import styles from "./Login.css";
+import styles from './Login.css';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { useAuthentication } from "../../hooks/useAuthentication";
+import { useAuthentication } from '../../hooks/useAuthentication';
 import emailVector from '../../assets/email-vector.svg';
 import passwordImage from '../../assets/password-vector.svg';
 import mainImage from '../../assets/login-illustrator.svg';
-import logo from "../../assets/logo-white.png";
+import logo from '../../assets/logo-white.png';
 
 import Button from '@mui/material/Button';
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const { login, error: authError, loading } = useAuthentication();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setError("");
+    setError('');
 
     const user = {
       email,
@@ -41,7 +41,7 @@ const Login = () => {
 
   return (
     <div className="login login-page flex bg-white">
-      <div className='left-content'>
+      <div className="left-content">
         <div className="logo-container">
           <img width="120px" src={logo} alt="logo da empresa"></img>
         </div>
@@ -50,7 +50,7 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <label>
             <span>E-mail:</span>
-            <div className='input-and-image'>
+            <div className="input-and-image">
               <input
                 type="email"
                 name="email"
@@ -60,13 +60,13 @@ const Login = () => {
                 value={email}
               />
               <div className="image-input">
-                <img src={emailVector}/>
+                <img src={emailVector} />
               </div>
             </div>
           </label>
           <label>
             <span>Senha:</span>
-            <div className='input-and-image'>
+            <div className="input-and-image">
               <input
                 type="password"
                 name="password"
@@ -76,7 +76,7 @@ const Login = () => {
                 value={password}
               />
               <div className="image-input">
-                <img src={passwordImage}/>
+                <img src={passwordImage} />
               </div>
             </div>
           </label>
@@ -90,8 +90,8 @@ const Login = () => {
           <Button href="/register">Não tem uma conta ainda?</Button>
         </form>
       </div>
-      <div className='right-content'>
-          <img width={"100%"} src={mainImage}/>
+      <div className="right-content">
+        <img width={'100%'} src={mainImage} />
       </div>
     </div>
   );

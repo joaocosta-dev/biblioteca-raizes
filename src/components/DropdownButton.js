@@ -3,9 +3,9 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-import { useAuthentication } from "../hooks/useAuthentication";
+import { useAuthentication } from '../hooks/useAuthentication';
 
-export default function DropdownButton({name}) {
+export default function DropdownButton({ name }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const { logout } = useAuthentication();
@@ -25,7 +25,7 @@ export default function DropdownButton({name}) {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
-        sx={{color: 'white'}}
+        sx={{ color: 'white' }}
       >
         {name}
       </Button>

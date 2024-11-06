@@ -1,31 +1,31 @@
 /* eslint-disable no-unused-vars */
-import "./App.css";
+import './App.css';
 
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
 
 // hooks
-import { useState, useEffect } from "react";
-import { useAuthentication } from "./hooks/useAuthentication";
+import { useState, useEffect } from 'react';
+import { useAuthentication } from './hooks/useAuthentication';
 
 // pages
-import Home from "./pages/Home/Home";
-import About from "./pages/About/About";
+import Home from './pages/Home/Home';
+import About from './pages/About/About';
 
 // components
-import Navbar from "./components/NavigationBar";
-import Footer from "./components/Footer";
-import CreateBook from "./pages/CreateBook/CreateBook";
-import Search from "./pages/Search/Search";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
-import Dashboard from "./pages/Dashboard/Dashboard";
-import Dash from "./pages/Dash/Dash";
-import EditBook from "./pages/EditBook/EditBook";
-import Book from "./pages/Book/Book";
+import Navbar from './components/NavigationBar';
+import Footer from './components/Footer';
+import CreateBook from './pages/CreateBook/CreateBook';
+import Search from './pages/Search/Search';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
+import Dashboard from './pages/Dashboard/Dashboard';
+import Dash from './pages/Dash/Dash';
+import EditBook from './pages/EditBook/EditBook';
+import Book from './pages/Book/Book';
 
 // context
-import { AuthProvider } from "./contexts/AuthContext";
+import { AuthProvider } from './contexts/AuthContext';
 
 //theme
 import { ThemeProvider } from '@emotion/react';
@@ -80,7 +80,6 @@ function App() {
                 path="/dashboard"
                 element={user ? <Dashboard /> : <Navigate to="/login" />}
               />
-
             </Routes>
           </div>
           <Footer />

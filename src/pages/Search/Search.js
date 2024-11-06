@@ -1,18 +1,18 @@
-import styles from "./Search.module.css";
+import styles from './Search.module.css';
 
 // hooks
-import { useFetchDocuments } from "../../hooks/useFetchDocuments";
-import { useQuery } from "../../hooks/useQuery";
+import { useFetchDocuments } from '../../hooks/useFetchDocuments';
+import { useQuery } from '../../hooks/useQuery';
 
 // components
-import { Link } from "react-router-dom";
-import BookDetail from "../../components/BookDetail";
+import { Link } from 'react-router-dom';
+import BookDetail from '../../components/BookDetail';
 
 const Search = () => {
   const query = useQuery();
-  const search = query.get("q");
+  const search = query.get('q');
 
-  const { documents: books } = useFetchDocuments("books", search);
+  const { documents: books } = useFetchDocuments('books', search);
 
   return (
     <div className={styles.search_container}>
@@ -26,15 +26,14 @@ const Search = () => {
             </Link>
           </>
         )}
-        {books && (
-          books.filter((book) => book.title.includes(search)).length > 0 ? (
+        {books &&
+          (books.filter((book) => book.title.includes(search)).length > 0 ? (
             books
               .filter((book) => book.title.toLowerCase().includes(search))
               .map((book) => <BookDetail key={book.id} book={book} />)
           ) : (
             <p>Nenhum item encontrado</p>
-          )
-        )}
+          ))}
       </div>
     </div>
   );

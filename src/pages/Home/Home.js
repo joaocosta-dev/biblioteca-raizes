@@ -1,16 +1,16 @@
-import styles from "./Home.css";
-import { useFetchDocuments } from "../../hooks/useFetchDocuments";
-import { useLocation, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import BookDetail from "../../components/BookDetail";
+import styles from './Home.css';
+import { useFetchDocuments } from '../../hooks/useFetchDocuments';
+import { useLocation, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import BookDetail from '../../components/BookDetail';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
 import ModalThanks from '../../components/ModalThanks';
 
 const Home = () => {
-  const { documents: books = [], loading } = useFetchDocuments("books");
-  const [query, setQuery] = useState("");
+  const { documents: books = [], loading } = useFetchDocuments('books');
+  const [query, setQuery] = useState('');
   const [filteredBooks, setFilteredBooks] = useState([]);
 
   const location = useLocation();
@@ -25,30 +25,29 @@ const Home = () => {
         setShowModal(false);
         localStorage.removeItem('navHome');
         document.addEventListener('click', handleClickPage);
-      }
+      };
 
       document.addEventListener('click', handleClickPage);
 
       //remove o listener se o componente desmontar
       return () => {
         document.removeEventListener('click', handleClickPage);
-      }
+      };
     }
-  }, [location])
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  }, [location]);
 
   // Função de filtro
   useEffect(() => {
     if (query) {
       const lowerCaseQuery = query.toLowerCase();
-      const filtered = books.filter(book => {
-        const tags = book.tags.replace(/#/g, '').split(',').map(tag => tag.trim());
+      const filtered = books.filter((book) => {
+        const tags = book.tags
+          .replace(/#/g, '')
+          .split(',')
+          .map((tag) => tag.trim());
         return (
           book.title.toLowerCase().includes(lowerCaseQuery) ||
-          tags.some(tag => tag.toLowerCase().includes(lowerCaseQuery))
+          tags.some((tag) => tag.toLowerCase().includes(lowerCaseQuery))
         );
       });
       setFilteredBooks(filtered);
@@ -63,7 +62,7 @@ const Home = () => {
     const tags = book.tags.replace(/#/g, '').split(',');
     a.push(...tags);
   });
-  a = [...new Set(a.map(tag => tag.trim()))]; // Remove duplicatas e espaços
+  a = [...new Set(a.map((tag) => tag.trim()))]; // Remove duplicatas e espaços
 
 
   return (
@@ -76,8 +75,10 @@ const Home = () => {
       <Box component="form"
         sx={{ '& > :not(style)': { m: 1, width: '100%', maxWidth: '475px' } }}
         noValidate
-        autoComplete="off">
-        <TextField id="outlined-basic"
+        autoComplete="off"
+      >
+        <TextField
+          id="outlined-basic"
           label="Qual livro ou tema você está procurando?"
           variant="outlined"
           onChange={(e) => setQuery(e.target.value)}
@@ -107,32 +108,37 @@ const Home = () => {
         />
       </Box>
 
-
       <div className="books_container">
         {loading && <p>Carregando...</p>}
         {books.length === 0 && !loading && (
           <div className="nobooks">
             <p>Não foram encontrados livros</p>
-            <Link to="/books/create" className="btn">Criar primeiro livro</Link>
+            <Link to="/books/create" className="btn">
+              Criar primeiro livro
+            </Link>
           </div>
         )}
 
-        {query && filteredBooks.length === 0 && (
-          <p>Nenhum item encontrado</p>
-        )}
+        {query && filteredBooks.length === 0 && <p>Nenhum item encontrado</p>}
 
         <ul>
           {a.map((tag, index) => {
             // Filtra livros para a tag atual, dependendo se a busca está ativa ou não
             const booksForTag = query
-              ? filteredBooks.filter(book => {
-                const bookTags = book.tags.replace(/#/g, '').split(',').map(tag => tag.trim());
-                return bookTags.includes(tag);
-              })
-              : books.filter(book => {
-                const bookTags = book.tags.replace(/#/g, '').split(',').map(tag => tag.trim());
-                return bookTags.includes(tag);
-              });
+              ? filteredBooks.filter((book) => {
+                  const bookTags = book.tags
+                    .replace(/#/g, '')
+                    .split(',')
+                    .map((tag) => tag.trim());
+                  return bookTags.includes(tag);
+                })
+              : books.filter((book) => {
+                  const bookTags = book.tags
+                    .replace(/#/g, '')
+                    .split(',')
+                    .map((tag) => tag.trim());
+                  return bookTags.includes(tag);
+                });
 
             return (
               booksForTag.length > 0 && (
@@ -140,7 +146,11 @@ const Home = () => {
                   <h2 className="text-white font-bold text-2xl mb-3">{tag}</h2>
                   <div className="books_list">
                     {booksForTag.map((book) => (
-                      <Link key={book.id} to={`/books/${book.id}`} className="fit_content">
+                      <Link
+                        key={book.id}
+                        to={`/books/${book.id}`}
+                        className="fit_content"
+                      >
                         <BookDetail book={book} />
                       </Link>
                     ))}
