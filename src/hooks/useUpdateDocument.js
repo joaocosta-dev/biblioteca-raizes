@@ -38,7 +38,6 @@ export const useUpdateDocument = (docCollection) => {
     try {
       const docRef = await doc(db, docCollection, uid);
 
-
       const updatedDocument = await updateDoc(docRef, data);
 
       checkCancelBeforeDispatch({
@@ -50,6 +49,7 @@ export const useUpdateDocument = (docCollection) => {
       checkCancelBeforeDispatch({ type: "ERROR", payload: error.message });
     }
   };
+  
 
   useEffect(() => {
     return () => setCancelled(true);

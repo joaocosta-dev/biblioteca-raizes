@@ -18,7 +18,7 @@ const Home = () => {
 
   useEffect(() => {
     const flagNavigation = localStorage.getItem('navHome');
-    if(location.pathname === '/' && flagNavigation === 'true') {
+    if (location.pathname === '/' && flagNavigation === 'true') {
       setShowModal(true);
 
       const handleClickPage = () => {
@@ -65,13 +65,16 @@ const Home = () => {
   });
   a = [...new Set(a.map(tag => tag.trim()))]; // Remove duplicatas e espaços
 
-  console.log("showModalHome: " + showModal)
 
   return (
     <div className="home">
-      {showModal && <ModalThanks showModalThanks={showModal}/>}
+      {showModal && <ModalThanks showModalThanks={showModal}
+        contextb1={"Solicitação Realizada"}
+        contextb2={"Sua solicitação foi realizada com sucesso"}
+        contextb21={", logo iremos retornar com mais informações sobre o processo."}
+        contextb3={"Em breve terá um boa leitura."} />}
       <Box component="form"
-        sx={{ '& > :not(style)': { m: 1, width: '100%', maxWidth:'475px' } }}
+        sx={{ '& > :not(style)': { m: 1, width: '100%', maxWidth: '475px' } }}
         noValidate
         autoComplete="off">
         <TextField id="outlined-basic"
