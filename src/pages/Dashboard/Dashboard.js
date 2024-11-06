@@ -77,14 +77,13 @@ const Dashboard = ( {bookTitle, bookDescript, bookImage} ) => {
         
         <div className="flex flex-col w-full">
 
-          <div className="my-5 ms-5">
+          <div>
             {
               booksAproved && booksAproved.length === 0 ? (
-                <div className={styles.noposts}>
-                  <p className="text-white">Não há livros em leitura</p>
+                <div className="h-0">
                 </div>
               ) : (
-                <div className="mt-4">
+                <div className="my-5 ms-5">
                   <span className="text-3xl font-bold text-white text-center">Lendo</span>
                 </div>
               )
@@ -114,7 +113,7 @@ const Dashboard = ( {bookTitle, bookDescript, bookImage} ) => {
                   <p className="text-white text-3xl font-medium mb-8">Não há livros aguardando Aprovação</p>
                   <div className="flex justify-center gap-14">
                     <img src={searchBook} alt="teste" className="w-full rounded-xl max-w-[500px] shadow-2xl"/>
-                    <div className="flex flex-col gap-4 max-w-[650px]">
+                    <div className="flex flex-col justify-center gap-4 max-w-[650px]">
                       <strong className="text-white text-xl border-s-8 border-black ps-3">
                         Explore nossa coleção e descubra um novo livro para mergulhar em uma leitura enriquecedora e envolvente! Aproveite o tempo para encontrar uma obra que irá inspirá-lo e abrir novas perspectivas.
                       </strong>
@@ -150,14 +149,13 @@ const Dashboard = ( {bookTitle, bookDescript, bookImage} ) => {
             </Grid>
           </Box>
 
-          <div className="my-5 ms-5">
+          <div>
             {
               readedBooksfilter && readedBooksfilter.length === 0 ? (
-                <div className={styles.noposts}>
-                  <p className="text-white">Não foram encontrados livros lidos</p>
+                <div className="h-0">
                 </div>
               ) : (
-                <div className="mt-4">
+                <div className="my-5 ms-5">
                   <span className="text-3xl font-bold text-white text-center">Livros lidos</span>
                 </div>
               )
