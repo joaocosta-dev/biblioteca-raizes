@@ -1,28 +1,28 @@
-import styles from "./EditBook.module.css"; // Renomeie o arquivo CSS se necessário
+import styles from './EditBook.module.css'; // Renomeie o arquivo CSS se necessário
 
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useAuthValue } from "../../contexts/AuthContext";
-import { useFetchDocument } from "../../hooks/useFetchDocument";
-import { useUpdateDocument } from "../../hooks/useUpdateDocument";
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useAuthValue } from '../../contexts/AuthContext';
+import { useFetchDocument } from '../../hooks/useFetchDocument';
+import { useUpdateDocument } from '../../hooks/useUpdateDocument';
 
 const EditBook = () => {
   const { id } = useParams();
-  const { document: book } = useFetchDocument("books", id); // Pega o documento específico de "books"
+  const { document: book } = useFetchDocument('books', id); // Pega o documento específico de "books"
 
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [image, setImage] = useState("");
-  const [description, setDescription] = useState("");
-  const [tags, setTags] = useState("");
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [image, setImage] = useState('');
+  const [description, setDescription] = useState('');
+  const [tags, setTags] = useState('');
   const [available, setAvailable] = useState(true);
   const [pages, setPages] = useState(0);
 
-  const [formError, setFormError] = useState("");
+  const [formError, setFormError] = useState('');
 
   const { user } = useAuthValue();
   const navigate = useNavigate();
-  const { updateDocument, response } = useUpdateDocument("books");
+  const { updateDocument, response } = useUpdateDocument('books');
 
   // Preencher o formulário com dados do livro
   useEffect(() => {
@@ -39,19 +39,19 @@ const EditBook = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormError("");
+    setFormError('');
 
     // Validar URL da imagem
     try {
       new URL(image);
     } catch (error) {
-      setFormError("A imagem precisa ser uma URL válida.");
+      setFormError('A imagem precisa ser uma URL válida.');
       return;
     }
 
     // Verificar campos obrigatórios
     if (!title || !author || !image || !description || !tags || !pages) {
-      setFormError("Por favor, preencha todos os campos!");
+      setFormError('Por favor, preencha todos os campos!');
       return;
     }
 
@@ -71,7 +71,7 @@ const EditBook = () => {
     });
 
     // Redirecionar para a página principal
-    navigate("/dashboard");
+    navigate('/dashboard');
   };
 
   return (
@@ -148,7 +148,7 @@ const EditBook = () => {
           <span>Disponível:</span>
           <select
             value={available}
-            onChange={(e) => setAvailable(e.target.value === "true")}
+            onChange={(e) => setAvailable(e.target.value === 'true')}
           >
             <option value="true">Sim</option>
             <option value="false">Não</option>

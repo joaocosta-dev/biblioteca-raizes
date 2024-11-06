@@ -1,6 +1,6 @@
-import styles from "./About.module.css";
+import styles from './About.module.css';
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const About = () => {
   return (

@@ -1,37 +1,36 @@
-import styles from "./Register.css";
+import styles from './Register.css';
 
-import { useEffect, useState } from "react";
-import { useAuthentication } from "../../hooks/useAuthentication";
+import { useEffect, useState } from 'react';
+import { useAuthentication } from '../../hooks/useAuthentication';
 
 import mainImage from '../../assets/login-illustrator.svg';
 
-
 const Register = () => {
-  const [displayName, setDisplayName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false)
-  const [readedBooks, setReadedBooks] = useState([])
+  const [displayName, setDisplayName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [readedBooks, setReadedBooks] = useState([]);
 
   const { createUser, error: authError, loading } = useAuthentication();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setError("");
+    setError('');
 
     const user = {
       displayName,
       email,
       password,
       isAdmin,
-      readedBooks
+      readedBooks,
     };
 
     if (password !== confirmPassword) {
-      setError("As senhas precisam ser iguais.");
+      setError('As senhas precisam ser iguais.');
       return;
     }
 
@@ -49,11 +48,15 @@ const Register = () => {
   return (
     <div className="register-page flex h-screen bg-white">
       <div className="left-content mx-auto my-auto w-full h-full flex justify-center">
-        <img width={"100%"} src={mainImage}/>
+        <img width={'100%'} src={mainImage} />
       </div>
       <div className="right-content my-auto w-full max-w-[450px] text-center">
-        <h1 className="text-black text-xl font-bold">Cadastre-se para postar</h1>
-        <p className="text-black text-lg font-medium mb-5">Crie seu usuário e compartilhe suas histórias</p>
+        <h1 className="text-black text-xl font-bold">
+          Cadastre-se para postar
+        </h1>
+        <p className="text-black text-lg font-medium mb-5">
+          Crie seu usuário e compartilhe suas histórias
+        </p>
         <form onSubmit={handleSubmit} className="flex flex-col mx-5">
           <label className="flex flex-col items-start">
             <span>Nome:</span>
@@ -118,7 +121,7 @@ const Register = () => {
           )}
           {error && <p className="error">{error}</p>}
         </form>
-      </div>      
+      </div>
     </div>
   );
 };

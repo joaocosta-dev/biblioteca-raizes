@@ -8,7 +8,6 @@
   max-height: 300px;
 }
 
-
 .book_detail_indisp {
   border: 1px solid #ddd;
   border-radius: 21px;
@@ -28,4 +27,3 @@
   display: flex;
   margin: 0 auto;
 }
-

@@ -4,10 +4,10 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
   signOut,
-} from "firebase/auth";
-import { db } from "../firebase/config"; // Importe o db de onde está configurado
-import { setDoc, doc } from "firebase/firestore"; // Importar métodos do Firestore
-import { useState, useEffect } from "react";
+} from 'firebase/auth';
+import { db } from '../firebase/config'; // Importe o db de onde está configurado
+import { setDoc, doc } from 'firebase/firestore'; // Importar métodos do Firestore
+import { useState, useEffect } from 'react';
 
 export const useAuthentication = () => {
   const [error, setError] = useState(null);
@@ -40,11 +40,11 @@ export const useAuthentication = () => {
         displayName: data.displayName,
       });
 
-      await setDoc(doc(db, "users", user.uid), {
+      await setDoc(doc(db, 'users', user.uid), {
         displayName: data.displayName,
         email: data.email,
-        isAdmin: data.isAdmin || false,// Define a flag isAdmin como false por padrão ou conforme definido
-        readedBooks: data.readedBooks  
+        isAdmin: data.isAdmin || false, // Define a flag isAdmin como false por padrão ou conforme definido
+        readedBooks: data.readedBooks,
       });
 
       return user;
@@ -54,12 +54,12 @@ export const useAuthentication = () => {
 
       let systemErrorMessage;
 
-      if (error.message.includes("Password")) {
-        systemErrorMessage = "A senha precisa conter pelo menos 6 caracteres.";
-      } else if (error.message.includes("email-already")) {
-        systemErrorMessage = "E-mail já cadastrado.";
+      if (error.message.includes('Password')) {
+        systemErrorMessage = 'A senha precisa conter pelo menos 6 caracteres.';
+      } else if (error.message.includes('email-already')) {
+        systemErrorMessage = 'E-mail já cadastrado.';
       } else {
-        systemErrorMessage = "Ocorreu um erro, por favor tenta mais tarde.";
+        systemErrorMessage = 'Ocorreu um erro, por favor tenta mais tarde.';
       }
 
       setError(systemErrorMessage);
@@ -85,16 +85,16 @@ export const useAuthentication = () => {
     } catch (error) {
       console.log(error.message);
       console.log(typeof error.message);
-      console.log(error.message.includes("user-not"));
+      console.log(error.message.includes('user-not'));
 
       let systemErrorMessage;
 
-      if (error.message.includes("user-not-found")) {
-        systemErrorMessage = "Usuário não encontrado.";
-      } else if (error.message.includes("wrong-password")) {
-        systemErrorMessage = "Senha incorreta.";
+      if (error.message.includes('user-not-found')) {
+        systemErrorMessage = 'Usuário não encontrado.';
+      } else if (error.message.includes('wrong-password')) {
+        systemErrorMessage = 'Senha incorreta.';
       } else {
-        systemErrorMessage = "Ocorreu um erro, por favor tenta mais tarde.";
+        systemErrorMessage = 'Ocorreu um erro, por favor tenta mais tarde.';
       }
 
       console.log(systemErrorMessage);

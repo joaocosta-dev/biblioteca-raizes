@@ -17,7 +17,7 @@ const style = {
   p: 4,
 };
 
-export default function ModalThanks({showModalThanks}) {
+export default function ModalThanks({ showModalThanks }) {
   const [open, setOpen] = React.useState(showModalThanks);
   const handleClose = () => setOpen(false);
 
@@ -30,13 +30,21 @@ export default function ModalThanks({showModalThanks}) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2" className="flex items-center">
-            <b>Solicitação realizada</b> 
-            <CheckIcon className="ms-2"/>
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            className="flex items-center"
+          >
+            <b>Solicitação realizada</b>
+            <CheckIcon className="ms-2" />
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <b>Sua solicitação foi realizada com sucesso</b>, logo iremos retornar com mais informações sobre o processo.
-            <br/><br/>Em breve terá um boa leitura.
+            <b>Sua solicitação foi realizada com sucesso</b>, logo iremos
+            retornar com mais informações sobre o processo.
+            <br />
+            <br />
+            Em breve terá um boa leitura.
           </Typography>
         </Box>
       </Modal>

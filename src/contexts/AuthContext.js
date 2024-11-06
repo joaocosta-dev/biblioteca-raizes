@@ -1,7 +1,7 @@
-import { useContext, createContext, useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-import { auth, db } from "../firebase/config"; // Importe auth e db corretamente
+import { useContext, createContext, useEffect, useState } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '../firebase/config'; // Importe auth e db corretamente
 
 const AuthContext = createContext();
 
@@ -17,7 +17,7 @@ export function AuthProvider({ children }) {
         setUser(user);
 
         // Busca a flag isAdmin do Firestore
-        const userDoc = await getDoc(doc(db, "users", user.uid));
+        const userDoc = await getDoc(doc(db, 'users', user.uid));
         if (userDoc.exists()) {
           const userData = userDoc.data();
           setIsAdmin(userData.isAdmin || false); // Define isAdmin como true ou false
@@ -34,11 +34,7 @@ export function AuthProvider({ children }) {
 
   const value = { user, isAdmin, loading };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 export function useAuthValue() {
