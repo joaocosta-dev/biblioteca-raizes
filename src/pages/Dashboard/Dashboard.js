@@ -8,6 +8,7 @@ import { useFetchDocument } from "../../hooks/useFetchDocument";
 import { useDeleteDocument } from "../../hooks/useDeleteDocument";
 import { useUpdateDocument as useUpdateRentalDocument } from "../../hooks/useUpdateDocument";
 import { useUpdateDocument as useUpdateBooksDocument } from "../../hooks/useUpdateDocument";
+import { useUpdateDocument as useUpdateUsersDocument } from "../../hooks/useUpdateDocument";
 
 
 import { Box, Tab } from '@mui/material';
@@ -19,13 +20,12 @@ import { arrayUnion } from "firebase/firestore";
 
 import CardBook from '../../components/CardBook';
 
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 
 import searchBook from '../../assets/search-book.jpg';
 
-const Dashboard = ( {bookTitle, bookDescript, bookImage} ) => {
+const Dashboard = ({ bookTitle, bookDescript, bookImage }) => {
   const { user } = useAuthValue();
 
   // Busca o usuário autenticado na tabela de usuários
@@ -60,6 +60,11 @@ const Dashboard = ( {bookTitle, bookDescript, bookImage} ) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const { updateDocument: updateRentalDocument } = useUpdateRentalDocument("rental")
+  const { updateDocument: updateBooksDocument } = useUpdateBooksDocument("books")
+  const { updateDocument: updateUsersDocument } = useUpdateUsersDocument("users")
+
 
   //Função que cria um objeto para ser usada na criação das rows da tabela 
   const createData = (rentalId, rentalStatus, bookName, requester, deadline, bookId, requesterId) => {
@@ -100,13 +105,13 @@ const Dashboard = ( {bookTitle, bookDescript, bookImage} ) => {
 
   };
   const { deleteDocument } = useDeleteDocument("rental");
-  
+
   // Cancela a solicitação do livro
   const handleDelete = (id) => {
     var rentalDelete = userSolicitedBooks.map(rental => rental)
 
     for (let i = 0; i < rentalDelete.length; i++) {
-      if(rentalDelete[i].bookId === id) {
+      if (rentalDelete[i].bookId === id) {
         deleteDocument(rentalDelete[i].id)
       }
     }
@@ -169,7 +174,7 @@ const Dashboard = ( {bookTitle, bookDescript, bookImage} ) => {
           <div className="my-5 ms-5">
             {
               booksWaitingAprov && booksWaitingAprov.length === 0 ? (
-                <div className={styles.noposts}>
+                <div className="noposts">
                   <p className="text-white text-3xl font-medium mb-8">Não há livros aguardando Aprovação</p>
                   <div className="flex justify-center gap-14">
                     <img src={searchBook} alt="teste" className="w-full rounded-xl max-w-[500px] shadow-2xl"/>
@@ -218,12 +223,28 @@ const Dashboard = ( {bookTitle, bookDescript, bookImage} ) => {
                 <div className="my-5 ms-5">
                   <span className="text-3xl font-bold text-white text-center">Livros lidos</span>
                 </div>
-              </div>
-            ))
-          }
-        </div >
-      </>
-
+              )
+            }
+          </div>
+          <Box sx={{flexGrow: 1}} className="mb-11">
+            <Grid container spacing={2} rowSpacing={4}>
+              {
+                readedBooksfilter &&
+                readedBooksfilter.map((book, index) => (
+                  <Grid item xs={3} key={book.id} className="flex justify-center">
+                    <CardBook
+                      bookTitle={book.title}
+                      bookDescript={truncatedDescription[index]}
+                      bookImage={book.image} 
+                      bookLink={`/books/${book.id}`}
+                    />
+                  </Grid>
+                ))
+              }          
+            </Grid>
+          </Box>
+        </div>      
+      </div>
     ) : (
       <div className="flex justify-center">
         <Box sx={{ m: 3, width: "100%", background: "linear-gradient(45deg, #0B8C7C, #086A5D)", borderRadius: "15px", padding: "20px", display: "flex", flexDirection: "column", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.4)" }}>

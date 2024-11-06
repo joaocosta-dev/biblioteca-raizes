@@ -52,7 +52,7 @@ export default function ButtonAppBar({ name }) {
           <Button color="inherit">
             <NavLink to="/about">Sobre</NavLink>
           </Button>
-          {user && (
+          {user && !isAdmin && (
             <>
               <Button color="inherit">
                 <NavLink to="/dashboard">Área do leitor</NavLink>
