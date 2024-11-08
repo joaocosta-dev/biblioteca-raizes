@@ -4,8 +4,10 @@ import clsx from 'clsx';
 import { styled, css } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
 
-export default function ModalRequests({ open, handleOpen, handleClose }) {
-  
+export default function ModalUnstyled() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <div>

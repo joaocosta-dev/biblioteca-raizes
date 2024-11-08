@@ -67,7 +67,7 @@ const CreateBook = () => {
         sx={{
           m: 3,
           width: '100%',
-          background: 'linear-gradient(45deg, #0B8C7C, #086A5D);',
+          background: 'linear-gradient(45deg, #04332d, #ffffff3b)',
           borderRadius: '15px',
           padding: '20px',
           display: 'flex',
@@ -328,8 +328,9 @@ const CreateBook = () => {
                 padding: '12px',
                 borderRadius: '10px',
                 color: '#FFF',
-                background: '#0B8C7C',
-                ':hover': { background: '#086A5D' },
+                background: '#006356',
+                fontWeight:'bold',
+                ':hover': { background: '#04332d', color:'#e0d4d4' },
               }} // Cor do botão
               disabled={response.loading}
             >

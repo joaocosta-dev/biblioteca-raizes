@@ -25,7 +25,7 @@ import Button from '@mui/material/Button';
 
 import searchBook from '../../assets/search-book.jpg';
 
-const Dashboard = ({ bookTitle, bookDescript, bookImage }) => {
+const Dashboard = () => {
   const { user } = useAuthValue();
 
   // Busca o usuário autenticado na tabela de usuários
@@ -83,7 +83,7 @@ const Dashboard = ({ bookTitle, bookDescript, bookImage }) => {
   }
 
   const handleReceive = (rental) => {
-    updateUsersDocument(rental.userId, { readedBooks: arrayUnion(rental.bookId) })
+    updateUsersDocument(rental.requesterId, { readedBooks: arrayUnion(rental.bookId) })
     updateBooksDocument(rental.bookId, { available: true, status: "available" })
     deleteDocument(rental.rentalId)
   }
@@ -139,7 +139,7 @@ const Dashboard = ({ bookTitle, bookDescript, bookImage }) => {
       <div className="container-dashboard container flex flex-col justify-center items-center py-14">
         <h2 className="text-white font-bold text-4xl mb-2">Área do leitor</h2>
         <p className="text-white font-medium text-xl mb-12">Acompanhe suas solicitações e leituras realizadas</p>
-        
+
         <div className="flex flex-col w-full">
 
           <div>
@@ -154,7 +154,7 @@ const Dashboard = ({ bookTitle, bookDescript, bookImage }) => {
               )
             }
           </div>
-          <Box sx={{flexGrow: 1}} className="mb-11">
+          <Box sx={{ flexGrow: 1 }} className="mb-11">
             <Grid container spacing={2} rowSpacing={4}>
               {
                 booksAproved && booksAproved.map((book, index) => (
@@ -162,7 +162,7 @@ const Dashboard = ({ bookTitle, bookDescript, bookImage }) => {
                     <CardBook
                       bookTitle={book.title}
                       bookDescript={truncatedDescriptionAprov[index]}
-                      bookImage={book.image} 
+                      bookImage={book.image}
                       bookLink={`/books/${book.id}`}
                     />
                   </Grid>
@@ -170,19 +170,19 @@ const Dashboard = ({ bookTitle, bookDescript, bookImage }) => {
               }
             </Grid>
           </Box>
-          
+
           <div className="my-5 ms-5">
             {
               booksWaitingAprov && booksWaitingAprov.length === 0 ? (
                 <div className="noposts">
                   <p className="text-white text-3xl font-medium mb-8">Não há livros aguardando Aprovação</p>
                   <div className="flex justify-center gap-14">
-                    <img src={searchBook} alt="teste" className="w-full rounded-xl max-w-[500px] shadow-2xl"/>
+                    <img src={searchBook} alt="teste" className="w-full rounded-xl max-w-[500px] shadow-2xl" />
                     <div className="flex flex-col justify-center gap-4 max-w-[650px]">
                       <strong className="text-white text-xl border-s-8 border-black ps-3">
                         Explore nossa coleção e descubra um novo livro para mergulhar em uma leitura enriquecedora e envolvente! Aproveite o tempo para encontrar uma obra que irá inspirá-lo e abrir novas perspectivas.
                       </strong>
-                      <Button variant="contained" sx={{backgroundColor: "black"}} className="w-max">
+                      <Button variant="contained" sx={{ backgroundColor: "black" }} className="w-max">
                         <Link to={"/"}>Procure um Livro</Link>
                       </Button>
                     </div>
@@ -195,7 +195,7 @@ const Dashboard = ({ bookTitle, bookDescript, bookImage }) => {
               )
             }
           </div>
-          <Box sx={{flexGrow: 1}} className="mb-11">
+          <Box sx={{ flexGrow: 1 }} className="mb-11">
             <Grid container spacing={2} rowSpacing={4}>
               {
                 booksWaitingAprov && booksWaitingAprov.map((book, index) => (
@@ -203,12 +203,12 @@ const Dashboard = ({ bookTitle, bookDescript, bookImage }) => {
                     <CardBook
                       bookTitle={book.title}
                       bookDescript={truncatedDescriptionWaiting[index]}
-                      bookImage={book.image} 
+                      bookImage={book.image}
                       bookLink={`/books/${book.id}`}
                       showCancelButton={true}
                       onCancel={() => handleDelete(book.id)}
                     />
-                  </Grid>                  
+                  </Grid>
                 ))
               }
             </Grid>
@@ -226,7 +226,7 @@ const Dashboard = ({ bookTitle, bookDescript, bookImage }) => {
               )
             }
           </div>
-          <Box sx={{flexGrow: 1}} className="mb-11">
+          <Box sx={{ flexGrow: 1 }} className="mb-11">
             <Grid container spacing={2} rowSpacing={4}>
               {
                 readedBooksfilter &&
@@ -235,19 +235,19 @@ const Dashboard = ({ bookTitle, bookDescript, bookImage }) => {
                     <CardBook
                       bookTitle={book.title}
                       bookDescript={truncatedDescription[index]}
-                      bookImage={book.image} 
+                      bookImage={book.image}
                       bookLink={`/books/${book.id}`}
                     />
                   </Grid>
                 ))
-              }          
+              }
             </Grid>
           </Box>
-        </div>      
+        </div>
       </div>
     ) : (
       <div className="flex justify-center">
-        <Box sx={{ m: 3, width: "100%", background: "linear-gradient(45deg, #0B8C7C, #086A5D)", borderRadius: "15px", padding: "20px", display: "flex", flexDirection: "column", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.4)" }}>
+        <Box sx={{ m: 3, width: "100%", background: "linear-gradient(225deg, #04332d, #ffffff3b)", borderRadius: "15px", padding: "20px", display: "flex", flexDirection: "column", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.4)" }}>
           <TabContext value={value} indicatorColor="primary">
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <TabList onChange={handleChange} aria-label="lab API tabs example" textColor="secondary" indicatorColor="transparent" sx={{ display: "flex", gap: "20px" }}>

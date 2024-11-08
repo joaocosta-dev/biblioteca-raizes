@@ -2,7 +2,7 @@
   .right-content {
     display: flex;
     padding: 10px;
-    background-color: #032924;
+    background-color: #4e4e4e;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
     transition: 0.3s ease-in-out;

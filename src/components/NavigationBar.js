@@ -57,8 +57,11 @@ export default function ButtonAppBar({ name }) {
               <Button color="inherit">
                 <NavLink to="/dashboard">Área do leitor</NavLink>
               </Button>
-              <DropdownButton name={user.displayName}></DropdownButton>
+
             </>
+          )}
+          {user && (
+            <DropdownButton name={user.displayName}></DropdownButton>
           )}
         </Toolbar>
       </AppBar>
