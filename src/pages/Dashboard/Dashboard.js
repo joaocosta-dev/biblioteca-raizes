@@ -284,7 +284,7 @@ const Dashboard = () => {
                 handleReceive={handleReceive} />
 
             </TabPanel>
-            <TabPanel value="2">Item Two</TabPanel>
+            <TabPanel value="2">Em breve...</TabPanel>
             <TabPanel value="3">Item Three</TabPanel>
           </TabContext>
         </Box>

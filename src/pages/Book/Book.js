@@ -21,7 +21,7 @@ import { useAuthValue } from '../../contexts/AuthContext';
 
 import Button from '@mui/material/Button';
 import { Height } from '@mui/icons-material';
-import { borderRadius } from '@mui/system';
+import { border, borderRadius } from '@mui/system';
 import { TextField } from '@mui/material';
 import { arrayUnion, increment } from 'firebase/firestore';
 
@@ -122,11 +122,11 @@ const Book = () => {
     e.preventDefault();
 
     const data = {
-        comment: comentario,
-        userId: user.uid,
-        userName: user.displayName,
-        bookId: id,
-        stars: stars,
+      comment: comentario,
+      userId: user.uid,
+      userName: user.displayName,
+      bookId: id,
+      stars: stars,
     };
 
     // Atualiza o Firestore
@@ -138,7 +138,7 @@ const Book = () => {
 
     // Fecha o modal
     setOpen(false);
-};
+  };
 
 
   return (
@@ -279,10 +279,8 @@ const Book = () => {
 
                 </>
               )}
-              {book.available === false && (
+              { /* book.available === false && (
                 <>
-                  {/* <p>Voce tem até dia {returnDeadline()} para devolução do livro<br />
-                  Gostaria de solicitar mais {Math.round(book.pages / 20)} dia(s)?</p> */}
                   <Button
                     sx={{ backgroundColor: 'black' }}
                     variant="contained"
@@ -292,7 +290,7 @@ const Book = () => {
                     Solicitar
                   </Button>
                 </>
-              )}
+              ) */}
             </>
           )}
         </div>
@@ -315,13 +313,13 @@ const Book = () => {
           <div className='flex justify-between mb-4'>
             <Typography className="flex" variant='h4' color='white'> Avaliações </Typography>
 
-            <Button sx={{ color: "white", ":hover": { background: "grey" } }} className='flex'> <StarBorderTwoToneIcon className='mr-2' />Avaliar Livro</Button>
+            <Button sx={{ color: "white", ":hover": { background: "grey" } }} className='flex' onClick={() => { setOpen(!open) }}> <StarBorderTwoToneIcon className='mr-2' />Avaliar Livro</Button>
           </div>
           {book && book.comments?.length !== 0 && (
             book.comments?.map((comment) => (
-              <div className='flex justify-between bg-zinc-700 rounded-xl min-h-40 mb-4 p-4' style={{ boxShadow: "0 4px 10px rgba(0, 0, 0, 0.4)" }}>
+              <div className='flex justify-between bg-zinc-700 rounded-xl min-h-40 mb-4 p-10' style={{ boxShadow: "0 4px 10px rgba(0, 0, 0, 0.4)" }}>
 
-                <div className='w-1/6'>
+                <div className='w-1/6 pr-1 my-auto'>
                   <p className='text-xl text-white font-bold'> {comment.userName} </p>
                   <p className='text-lg text-gray-400'>
                     {users?.map((us) => {
@@ -334,12 +332,12 @@ const Book = () => {
                     avaliações
                   </p>
                 </div>
-                <div className='w-4/6'>
-                  <p className='text-white text-lg '>{comment.comment}</p>
+                <div className='w-4/6 border-l-2 rounded-sm'>
+                  <p className='text-white text-lg ml-4'>{comment.comment}</p>
 
                 </div>
-                <div className='w-1/6'>
-                  <p >{comment.stars}/5</p>
+                <div className='w-1/6 flex '>
+                  <p className='text-3xl text-white font-bold ml-auto h-fit p-3 rounded-md shadow-xl mt-auto mb-auto'>{comment.stars}<span className='text-lg font-normal'>/5</span> <StarBorderTwoToneIcon /></p>
 
                 </div>
 

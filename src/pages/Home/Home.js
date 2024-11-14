@@ -73,7 +73,7 @@ const Home = () => {
         contextb21={", logo iremos retornar com mais informações sobre o processo."}
         contextb3={"Em breve terá um boa leitura."} />}
       <Box component="form"
-        sx={{ '& > :not(style)': { m: 1, width: '100%', maxWidth: '475px' } }}
+        sx={{ '& > :not(style)': { m: 1, mb: 4, width: '100%', maxWidth: '475px' } }}
         noValidate
         autoComplete="off"
       >
@@ -82,6 +82,7 @@ const Home = () => {
           label="Qual livro ou tema você está procurando?"
           variant="outlined"
           onChange={(e) => setQuery(e.target.value)}
+
           sx={{
             '& .MuiOutlinedInput-root': {
               '& fieldset': {
@@ -96,6 +97,7 @@ const Home = () => {
               color: '#FFFFFF', // Cor do texto
               // backgroundColor: '#FFFFFF', // Cor do fundo
             },
+
           }}
           InputLabelProps={{
             sx: {
@@ -126,23 +128,23 @@ const Home = () => {
             // Filtra livros para a tag atual, dependendo se a busca está ativa ou não
             const booksForTag = query
               ? filteredBooks.filter((book) => {
-                  const bookTags = book.tags
-                    .replace(/#/g, '')
-                    .split(',')
-                    .map((tag) => tag.trim());
-                  return bookTags.includes(tag);
-                })
+                const bookTags = book.tags
+                  .replace(/#/g, '')
+                  .split(',')
+                  .map((tag) => tag.trim());
+                return bookTags.includes(tag);
+              })
               : books.filter((book) => {
-                  const bookTags = book.tags
-                    .replace(/#/g, '')
-                    .split(',')
-                    .map((tag) => tag.trim());
-                  return bookTags.includes(tag);
-                });
+                const bookTags = book.tags
+                  .replace(/#/g, '')
+                  .split(',')
+                  .map((tag) => tag.trim());
+                return bookTags.includes(tag);
+              });
 
             return (
               booksForTag.length > 0 && (
-                <li className="mb-5" key={index}>
+                <li className="mb-8" key={index}>
                   <h2 className="text-white font-bold text-2xl mb-3">{tag}</h2>
                   <div className="books_list">
                     {booksForTag.map((book) => (

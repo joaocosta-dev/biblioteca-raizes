@@ -52,10 +52,10 @@ const Register = () => {
       </div>
       <div className="right-content my-auto w-full max-w-[450px] text-center">
         <h1 className="text-black text-xl font-bold">
-          Cadastre-se para postar
+          Cadastre-se para locar
         </h1>
         <p className="text-black text-lg font-medium mb-5">
-          Crie seu usuário e compartilhe suas histórias
+          Crie seu usuário e desfrute de suas leituras
         </p>
         <form onSubmit={handleSubmit} className="flex flex-col mx-5">
           <label className="flex flex-col items-start">
@@ -102,7 +102,7 @@ const Register = () => {
               value={confirmPassword}
             />
           </label>
-          <label className="flex items-center gap-3">
+          {/* <label className="flex items-center gap-3">
             <span>Administrador:</span>
             <input
               type="checkbox"
@@ -111,7 +111,7 @@ const Register = () => {
               checked={isAdmin}
               className="max-w-[20px] input-checkbox"
             />
-          </label>
+          </label> */}
 
           {!loading && <button className="btn btn-register">Cadastrar</button>}
           {loading && (

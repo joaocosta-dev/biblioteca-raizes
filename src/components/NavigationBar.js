@@ -49,9 +49,9 @@ export default function ButtonAppBar({ name }) {
               </Button>
             </>
           )}
-          <Button color="inherit">
+          {/* <Button color="inherit">
             <NavLink to="/about">Sobre</NavLink>
-          </Button>
+          </Button> */}
           {user && !isAdmin && (
             <>
               <Button color="inherit">

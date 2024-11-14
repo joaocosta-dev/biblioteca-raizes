@@ -17,6 +17,24 @@
   opacity: 0.4;
   max-width: 200px;
   max-height: 300px;
+  position: relative;
+}
+
+.book_detail_indisp::after {
+  content: "Alugado";
+  background: #000;
+  position: absolute;
+  color: white;
+  font-size: 20px;
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  top: 30px;
+  width: 100%;
+  left: 20%;
+  opacity: 1 !important;
+  transform: rotate(35deg);
 }
 
 .book_detail img,

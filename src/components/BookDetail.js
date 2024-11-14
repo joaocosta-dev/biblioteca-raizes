@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 
 import styles from './BookDetail.module.css'; // Atualize o nome do arquivo CSS se necessário
 
+
 const BookDetail = ({ book }) => {
   return (
     <>
