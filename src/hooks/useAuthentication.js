@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
   signOut,
+  sendEmailVerification
 } from 'firebase/auth';
 import { db } from '../firebase/config'; // Importe o db de onde está configurado
 import { setDoc, doc } from 'firebase/firestore'; // Importar métodos do Firestore
@@ -39,7 +40,7 @@ export const useAuthentication = () => {
       await updateProfile(user, {
         displayName: data.displayName,
       });
-
+      await auth.sendEmailVerification()
       await setDoc(doc(db, 'users', user.uid), {
         displayName: data.displayName,
         email: data.email,

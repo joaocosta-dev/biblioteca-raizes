@@ -8,17 +8,17 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
-      "type": "image/png",
+      "src": "logo-192.jpg",
+      "type": "image/jpg",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
-      "type": "image/png",
+      "src": "logo-512.jpg",
+      "type": "image/jpg",
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "https://biblioteca-raizes.vercel.app/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#04332d"
